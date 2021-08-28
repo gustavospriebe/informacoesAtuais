@@ -1,31 +1,22 @@
-const texto = document.querySelector(".container");
-const data = new Date();
+const container = document.querySelector('.container');
+const h2 = document.createElement('h2');
+const h1 = document.createElement('h1');
 
-// Função para formatação de datas
-const zeroAEsquerda = (num) => num >= 10 ? num : `0${num}`;
+function time() {
+    let data = new Date();
 
-const dia = zeroAEsquerda(data.getDate());
-const mes = data.getMonth();
-const ano = zeroAEsquerda(data.getFullYear());
-const hora = zeroAEsquerda(data.getHours());
-const min = zeroAEsquerda(data.getMinutes());
-const seg = zeroAEsquerda(data.getSeconds());
-const diaSemana = data.getDay();
+    function getDate() {
+        let date = data.toLocaleString('pt-BR',{weekday: 'long', day: '2-digit', month: 'long', year: 'numeric'});
+        return date;
+    }
+    
+    function getHours() {
+        let hour = data.toLocaleString('pt-BR', {hour:'2-digit', minute: '2-digit', second: '2-digit'});
+        return hour;
+    }
 
-// Função para transformar o getDay em Dias da Semana
-function diaSemanaTexto(dia) {
-    const diaSemana = ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado']
-    return diaSemana[dia];
+    container.innerHTML = `<h2>${getDate()}</h2>`;
+    container.innerHTML += `<h1>${getHours()}</h1>`;
 }
 
-// Função para transformar o gerMonth em Meses
-function mesTexto(mes) {
-    const meses = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro']
-    return meses[mes];
-}
-
-console.log(dia, mesTexto(mes), ano, hora, min, seg,diaSemanaTexto(diaSemana))
-
-texto.innerHTML = "";
-texto.innerHTML = `<h2>${diaSemanaTexto(diaSemana)}, ${dia} de ${mesTexto(mes)} de ${ano}</h2>`;
-texto.innerHTML += `<h1>${hora}:${min}:${seg}</h1>`;
+setInterval(time ,1000);
