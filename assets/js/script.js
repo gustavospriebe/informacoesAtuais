@@ -1,6 +1,4 @@
 const container = document.querySelector('.container');
-const h2 = document.createElement('h2');
-const h1 = document.createElement('h1');
 
 function time() {
     let data = new Date();
